@@ -1,0 +1,55 @@
+todo:
+    resource: "@TodoBundle/Resources/config/routing.xml"
+    prefix:   /
+
+
+_welcome:
+    pattern:   /
+    defaults:  { _controller: TodoBundle:Default:index }
+
+_task_new:
+    pattern:   /tasks/new
+    defaults:  { _controller: TodoBundle:Default:newTask }    
+
+_task_edit:
+    pattern:   /tasks/edit/{id}
+    defaults:  { _controller: TodoBundle:Default:editTask }        
+
+    
+_user_list:
+    pattern:   /users/
+    defaults:  { _controller: TodoBundle:Default:indexUser }    
+    
+    
+_user_edit:
+    pattern:   /users/edit/{id}
+    defaults:  { _controller: TodoBundle:Default:editUser }      
+    
+_user_new:
+    pattern:   /users/new/
+    defaults:  { _controller: TodoBundle:Default:newUser }          
+
+_priority_list:
+    pattern:   /priority/
+    defaults:  { _controller: TodoBundle:Default:indexPriority }    
+
+_status_list:
+    pattern:   /status/
+    defaults:  { _controller: TodoBundle:Default:indexStatus }    
+
+_status_edit:
+    pattern:   /status/edit/{id}
+    defaults:  { _controller: TodoBundle:Default:editStatus }      
+    
+_status_new:
+    pattern:   /status/new/
+    defaults:  { _controller: TodoBundle:Default:newStatus }       
+
+_priority_edit:
+    pattern:   /priority/edit/{id}
+    defaults:  { _controller: TodoBundle:Default:editPriority }      
+    
+_priority_new:
+    pattern:   /priority/new/
+    defaults:  { _controller: TodoBundle:Default:newPriority }       
+

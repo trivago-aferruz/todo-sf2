@@ -1,0 +1,20 @@
+{% extends "TodoBundle::layout.html.twig" %}
+{% block title %}Edit Task  {%endblock%}
+{% block content %}
+<form action="{{ path('_task_edit',{'id': task.id}) }}" method="post" {{ form_enctype(form) }}>
+    {{ form_errors(form) }}
+
+    {{ form_row(form.description,{'label':'Description: '}) }}
+    {{ form_row(form.priority,{'label':'Priority: '}) }} 
+    {{ form_row(form.status,{'label':'Status: '}) }} 
+    {{ form_row(form.reporter, {'label':'Reporter: '}) }}    
+    {{ form_row(form.assignee, {'label':'Assignee: '}) }}
+    
+    
+    {{ form_widget(form._token) }}
+
+    
+
+    <input type="submit" /> <a href="{{ path('_welcome')}}">Return to the list</a>
+</form>
+{%endblock%}

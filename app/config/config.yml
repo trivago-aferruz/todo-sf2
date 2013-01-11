@@ -1,0 +1,80 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+    - { resource: @MopaBootstrapSandboxBundle/Resources/config/themes.yml }
+    - { resource: menu.yml }
+    - { resource: navbar.yml }
+    - { resource: @MopaRemoteUpdateBundle/Resources/config/config.yml }
+    - { resource: @MopaRemoteUpdateBundle/Resources/config/database.yml }
+
+framework:
+    #esi:             ~
+    #translator:      { fallback: %locale% }
+    secret:          %secret%
+    router:          { resource: "%kernel.root_dir%/config/routing.yml" }
+    form:            true
+    csrf_protection: true
+    validation:      { enabled: true }
+    templating:      { engines: ['twig'] } #assets_version: SomeVersionScheme
+    default_locale:  %locale%
+    session:         ~
+
+# Twig Configuration
+twig:
+    debug:            %kernel.debug%
+    strict_variables: %kernel.debug%
+    form:
+        resources:
+            - 'MopaBootstrapBundle:Form:fields.html.twig'
+
+# Assetic Configuration
+assetic:
+    debug:          %kernel.debug%
+    use_controller: false
+    filters:
+        cssrewrite: ~
+
+# Doctrine Configuration
+doctrine:
+    orm:
+        auto_generate_proxy_classes: %kernel.debug%
+        auto_mapping: true
+
+# Swiftmailer Configuration
+swiftmailer:
+    transport: %mailer_transport%
+    host:      %mailer_host%
+    username:  %mailer_user%
+    password:  %mailer_password%
+    spool:     { type: memory }
+
+mopa_bootstrap:
+    navbar: ~
+    form: 
+        collection:
+            widget_remove_btn:
+                icon: trash
+            widget_add_btn:
+                icon: plus-sign
+    initializr:
+        google:
+            analytics: UA-17161773-2
+
+mopa_remote_update:
+    remotes:
+        vserverli2:
+            preUpdate: git pull
+            postUpdate: bin/post-composer.sh -w
+            url: %mopa_remote_update_url%
+            username: %mopa_remote_update_user%
+            password: %mopa_remote_update_password%
+            updater: cron
+    composer: /usr/sbin/composer.phar
+    
+    
+propel:
+    dbal:
+        driver:     %database_driver%
+        user:       %database_user%
+        password:   %database_password%
+        dsn:        %database_driver%:host=%database_host%;dbname=%database_name%;charset=UTF8    

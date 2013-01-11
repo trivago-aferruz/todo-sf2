@@ -1,0 +1,13 @@
+{% extends "TodoBundle::layout.html.twig" %}
+{% block title %}Edit Status {{ status.name }} {%endblock%}
+{% block content %}
+<form action="{{ path('_status_edit',{'id': status.id}) }}" method="post" {{ form_enctype(form) }}>
+    {{ form_errors(form) }}
+
+    {{ form_row(form.name) }}
+
+    {{ form_rest(form) }}
+
+    <input type="submit" /> <a href="{{ path('_status_list')}}">Return to the list</a>
+</form>
+{%endblock%}

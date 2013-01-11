@@ -1,0 +1,26 @@
+{% extends "TodoBundle::layout.html.twig" %}
+{% block title %}Users{%endblock%}
+{% block content %}
+<h5><a href="{{ path('_user_new')}}">Add new</a></h5>
+<table class="table table-hover">
+<thead>
+  <tr>
+    <th>#</th>
+    <th>Name</th>
+    <th></th>
+    
+  </tr>
+</thead>
+<tbody>
+    {% for user in users %}
+        <tr>
+          <td>{{ user.id }}</td>
+          <td>{{ user.name }}</td>
+          <td><a href="{{ path('_user_edit',{'id': user.id})}}">Edit</a></td>
+          
+        </tr>
+    {% endfor %}
+
+</tbody>
+</table>
+{%endblock%}

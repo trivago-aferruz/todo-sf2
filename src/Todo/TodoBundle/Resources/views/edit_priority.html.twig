@@ -1,0 +1,13 @@
+{% extends "TodoBundle::layout.html.twig" %}
+{% block title %}Edit Priority {{ priority.name }} {%endblock%}
+{% block content %}
+<form action="{{ path('_priority_edit',{'id': priority.id}) }}" method="post" {{ form_enctype(form) }}>
+    {{ form_errors(form) }}
+
+    {{ form_row(form.name) }}
+
+    {{ form_rest(form) }}
+
+    <input type="submit" /> <a href="{{ path('_priority_list')}}">Return to the list</a>
+</form>
+{%endblock%}

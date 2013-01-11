@@ -1,0 +1,28 @@
+{% extends "::base.html.twig" %}
+{% block header %}
+<div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          
+          <a class="brand" href="#">To-Do</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="first"><a href="{{ path('_welcome') }}">Tasks</a></li>
+              <li><a href="{{ path('_user_list') }}">Users</a></li>
+              <li><a href="{{ path('_priority_list') }}">Priority</a></li>
+              <li><a href="{{ path('_status_list') }}">Status</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div> 
+
+{%endblock%}
+
+{% block footer %}
+<div id="footer">
+      <div class="container">
+        <p class="muted credit">&copy; Trivago Special Operations Teams 2013</p>
+      </div>
+    </div>
+{%endblock%}

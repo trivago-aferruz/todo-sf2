@@ -1,0 +1,18 @@
+{% extends "TodoBundle::layout.html.twig" %}
+{% block title %}Add Task  {%endblock%}
+{% block content %}
+<form action="{{ path('_task_new') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_errors(form) }}
+
+    {{ form_row(form.description,{'label':'Description: '}) }}
+    {{ form_row(form.priority,{'label':'Priority: '}) }}        
+    {{ form_row(form.reporter, {'label':'Reporter: '}) }}    
+    {{ form_row(form.assignee, {'label':'Assignee: '}) }}
+    
+    {{ form_widget(form._token) }}
+
+    
+
+    <input type="submit" /> <a href="{{ path('_welcome')}}">Return to the list</a>
+</form>
+{%endblock%}

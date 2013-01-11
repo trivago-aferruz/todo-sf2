@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database name="default" namespace="Todo\TodoBundle\Model" defaultIdMethod="native">
+    <table name="task" phpName="Task">
+        <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+        <column name="description" type="longvarchar"  required="true"/>
+        <column name="status_id" type="integer" />
+        <foreign-key foreignTable="status">
+            <reference local="status_id" foreign="id" />
+        </foreign-key>
+        <column name="priority_id" type="integer" />
+        <foreign-key foreignTable="priority">
+            <reference local="priority_id" foreign="id" />
+        </foreign-key>
+        <column name="reporter_id" type="integer" />
+        <foreign-key foreignTable="user" phpName="reporter">
+            <reference local="reporter_id" foreign="id" />
+        </foreign-key>
+        <column name="assignee_id" type="integer" />
+        <foreign-key foreignTable="user" phpName="assignee">
+            <reference local="assignee_id" foreign="id" />
+        </foreign-key>
+        <behavior name="timestampable" />
+    </table>
+    <table name="priority">
+        <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+        <column name="name" type="varchar" primaryString="true" size="100" required="true"/>
+    </table>
+
+    <table name="status">
+        <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+        <column name="name" type="varchar" primaryString="true" size="100"  required="true"/>
+    </table>
+    <table name="user">
+        <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+        <column name="name" type="varchar" primaryString="true" size="100" required="true"/>
+    </table>
+    
+</database>

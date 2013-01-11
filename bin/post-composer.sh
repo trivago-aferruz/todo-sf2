@@ -1,0 +1,1 @@
+../vendor/mopa/remote-update-bundle/Mopa/Bundle/RemoteUpdateBundle/Resources/bin/post-composer.sh

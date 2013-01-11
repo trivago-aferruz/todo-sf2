@@ -1,0 +1,24 @@
+{% extends "TodoBundle::layout.html.twig" %}
+{% block title %}Status{%endblock%}
+{% block content %}
+<h5><a href="{{ path('_status_new')}}">Add new</a></h5>
+<table class="table table-hover">
+<thead>
+  <tr>
+    <th>#</th>
+    <th>Name</th>
+    <th></th>
+  </tr>
+</thead>
+<tbody>
+      {% for status in statuses %}
+        <tr>
+          <td>{{ status.id }}</td>
+          <td>{{ status.name }}</td>
+          <td><a href="{{ path('_status_edit',{'id': status.id})}}">Edit</a></td>
+        </tr>
+    {% endfor %}
+
+</tbody>
+</table>
+{%endblock%}

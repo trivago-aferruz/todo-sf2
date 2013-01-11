@@ -1,0 +1,24 @@
+{% extends "TodoBundle::layout.html.twig" %}
+{% block title %}Priority{%endblock%}
+{% block content %}
+<h5><a href="{{ path('_priority_new')}}">Add new</a></h5>
+<table class="table table-hover">
+<thead>
+  <tr>
+    <th>#</th>
+    <th>Name</th>
+    <th></th>
+  </tr>
+</thead>
+<tbody>
+      {% for priority in priorities %}
+        <tr>
+          <td>{{ priority.id }}</td>
+          <td>{{ priority.name }}</td>
+          <td><a href="{{ path('_priority_edit',{'id': priority.id})}}">Edit</a></td>
+        </tr>
+    {% endfor %}
+
+</tbody>
+</table>
+{%endblock%}
