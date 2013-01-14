@@ -1,0 +1,16 @@
+/* 
+    Document   : custom-style
+    Created on : Jan 14, 2013, 10:11:20 AM
+    Author     : aferruz
+    Description:
+        Overwrite some bootstrap styles
+*/
+
+.table-header{
+    
+    background-color: #A7A6A8;
+    
+}
+
+
+

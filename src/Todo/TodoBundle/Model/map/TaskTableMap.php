@@ -43,7 +43,7 @@ class TaskTableMap extends TableMap
         $this->setUseIdGenerator(true);
         // columns
         $this->addPrimaryKey('id', 'Id', 'INTEGER', true, null, null);
-        $this->addColumn('description', 'Description', 'LONGVARCHAR', true, null, null);
+        $this->addColumn('description', 'Description', 'VARCHAR', true, 255, null);
         $this->addForeignKey('status_id', 'StatusId', 'INTEGER', 'status', 'id', false, null, null);
         $this->addForeignKey('priority_id', 'PriorityId', 'INTEGER', 'priority', 'id', false, null, null);
         $this->addForeignKey('reporter_id', 'ReporterId', 'INTEGER', 'user', 'id', false, null, null);
@@ -51,6 +51,7 @@ class TaskTableMap extends TableMap
         $this->addColumn('created_at', 'CreatedAt', 'TIMESTAMP', false, null, null);
         $this->addColumn('updated_at', 'UpdatedAt', 'TIMESTAMP', false, null, null);
         // validators
+        $this->addValidator('description', 'unique', 'propel.validator.UniqueValidator', '', 'Description already exists !');
     } // initialize()
 
     /**

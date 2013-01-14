@@ -4,7 +4,19 @@
 <form action="{{ path('_task_edit',{'id': task.id}) }}" method="post" {{ form_enctype(form) }}>
     {{ form_errors(form) }}
 
-    {{ form_row(form.description,{'label':'Description: '}) }}
+    {{ form_label(form.description) }}    
+    <div class="control-group 
+         {% if 'task.description' in errors|keys %}
+            error
+         {% endif %}
+    ">
+        <div class="controls">
+            {{ form_widget(form.description,{'label':'Description: '}) }}
+            {% if 'task.description' in errors|keys %}
+                <span class="help-inline">{{errors['task.description'].message}}</span>
+            {% endif %}
+        </div>
+    </div> 
     {{ form_row(form.priority,{'label':'Priority: '}) }} 
     {{ form_row(form.status,{'label':'Status: '}) }} 
     {{ form_row(form.reporter, {'label':'Reporter: '}) }}    

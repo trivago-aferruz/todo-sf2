@@ -3,6 +3,8 @@
 namespace Todo\TodoBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Form\Form;
 
 
 use Todo\TodoBundle\Model\User;
@@ -20,15 +22,21 @@ use Todo\TodoBundle\Form\Type\TaskType as TaskType;
 
 class DefaultController extends Controller
 {
-    public function indexAction()
+    
+    
+    public function indexAction($ajax_update=NULL)
     {
         $tasks = TaskQuery::create()
                 ->orderByPriorityId('asc')
                 ->orderByCreatedAt('asc')
                 ->find();
-        
-        return $this->render('TodoBundle::index.html.twig',array('tasks'=>$tasks));
+        if($ajax_update == NULL){
+            return $this->render('TodoBundle::index.html.twig',array('tasks'=>$tasks));
+        }else{
+            return $this->render('TodoBundle::table_task.html.twig',array('tasks'=>$tasks));
+        }
     }
+    
     
     public function indexUserAction()
     {
@@ -97,23 +105,20 @@ class DefaultController extends Controller
 
         if ('POST' === $request->getMethod()) {
             $form->bindRequest($request);
-
+            
             if ($form->isValid()) {
-                
-               
-                
-                $task->setStatusId(3);
-                
-                $task->save();
-
-                return $this->redirect($this->generateUrl('_welcome'));
+                if ($task->validate()) {
+                    $task->setStatusId(3);
+                    $task->save();
+                    return $this->redirect($this->generateUrl('_welcome'));
+                }     
             }
         }
 
-        
+                
         return $this->render('TodoBundle::new_task.html.twig', array(
-            'form' => $form->createView(),
-        ));
+                         'form' => $form->createView(),'errors' => $task->getValidationFailures()
+                        ));
     }
     
     
@@ -130,17 +135,53 @@ class DefaultController extends Controller
         if ('POST' === $request->getMethod()) {
             $form->bindRequest($request);
             if ($form->isValid()) {
-            
-                
-                $task->save();
-
-                return $this->redirect($this->generateUrl('_welcome'));
+                if ($task->validate()) {
+                    $task->save();
+                    return $this->redirect($this->generateUrl('_welcome'));
+                }
             }
         }
 
         
         return $this->render('TodoBundle::edit_task.html.twig', array(
-            'form' => $form->createView(),'task'=>$task));
+            'form' => $form->createView(),'task'=>$task,'errors' => $task->getValidationFailures()));
+    }
+    
+    public function doneTaskAction($id){
+        
+        // the error message
+        $errorData = array("response"=>"ko",
+                      "response_header" => "Set Done task fails",
+                      "response_text" => "The actions fails. Please contact with your administrator systems");
+        
+        $successData =  array("response"=>"ok",
+                      "response_header" => "Set Done task",
+                      "response_text" => "It has been successfully Done the task"
+                    );
+        // request the task
+        $task = TaskQuery::create()
+                ->filterById($id)
+                ->findOne();
+
+        if($task){
+            // statusId =1 Done
+            $task->setStatusId(1);
+            $task->save();
+            
+            $task_after = TaskQuery::create()
+                ->filterById($id)
+                ->findOne();
+            
+            if($task_after->getStatusId() == 1){
+                $data = $successData;
+            }else{
+                $data = $errorData;
+            }
+        }else{
+            $data = $errorData;
+        }
+        return new Response(json_encode($data));
+      
     }
     
     

@@ -1,0 +1,32 @@
+<thead>
+    <tr class="table-header">
+    <th><input type="checkbox" class="select-all"></th>  
+    <th>Id</th>
+    <th>Priority</th>
+    <th>Description</th>
+    <th>Assignee to</th>
+    <th>Reporter to</th>
+    <th>Status</th>
+    <th>Created at</th>
+    <th></th>
+  </tr>
+</thead>
+<tbody>
+     {% for task in tasks %}
+        <tr>
+          <td><input type="checkbox"></td>  
+          <td>{{ task.id}}</td>
+          <td>{{ task.priority.name}}</td>
+          <td>{{ task.description}}</td>
+          <td>{{ task.assignee.name}}</td>
+          <td>{{ task.reporter.name}}</td>
+          <td>{{ task.status.name}}</td>
+          <td>{{ task.createdAt|date('Y-m-d H:i:s') }}</td>
+          <td> <button class="edit btn btn-small" type="button" href="{{ path('_task_edit',{'id': task.id})}}">Edit</button>
+               {% if task.status.id != 1 %}
+                    <button class="confirm-done btn btn-small btn-success" type="button"  data-id="{{ task.id }}">Done</button>  </td>
+               {% endif %}
+        </tr>
+    {% endfor %}
+
+</tbody>

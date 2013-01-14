@@ -12,7 +12,7 @@ DROP TABLE IF EXISTS `task`;
 CREATE TABLE `task`
 (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `description` TEXT NOT NULL,
+    `description` VARCHAR(255) NOT NULL,
     `status_id` INTEGER,
     `priority_id` INTEGER,
     `reporter_id` INTEGER,

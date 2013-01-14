@@ -11,6 +11,7 @@
    {% stylesheets
         '@TodoBundle/Resources/public/css/bootstrap.css'
         '@TodoBundle/Resources/public/css/bootstrap-responsive.css'
+'@TodoBundle/Resources/public/css/custom-style.css'
     %}
         <style type="text/css">
 
@@ -78,11 +79,15 @@
     {% javascripts
         '@TodoBundle/Resources/public/js/jquery-1.8.3.min.js'
         '@TodoBundle/Resources/public/js/bootstrap.min.js'
+        '@TodoBundle/Resources/public/js/custom-js.js'
         
           output='js/head_compiled.js'
     %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
+        
+    {%block modal_done%}{%endblock%}
+    {%block modal_success%}{%endblock%}
     
     
     

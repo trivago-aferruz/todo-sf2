@@ -2058,6 +2058,9 @@ abstract class BaseTaskPeer
             }
         } else {
 
+        if ($obj->isNew() || $obj->isColumnModified(TaskPeer::DESCRIPTION))
+            $columns[TaskPeer::DESCRIPTION] = $obj->getDescription();
+
         }
 
         return BasePeer::doValidate(TaskPeer::DATABASE_NAME, TaskPeer::TABLE_NAME, $columns);

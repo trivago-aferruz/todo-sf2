@@ -3,7 +3,8 @@
 {% block title %}Tasks{%endblock%}
 
 {% block content %}
-<h4><a href="{{ path('_task_new')}}">Add new</a></h4>
+<a href="{{ path('_task_new')}}" class="btn btn-small"><i class="icon-plus"></i> New</a>
+
 <!--
 <ul class="nav nav-pills">
   <li class="active">
@@ -13,47 +14,43 @@
   <li><a href="#">...</a></li>
 </ul>
 -->
-<table class="table table-hover">
-<thead>
-  <tr>
-    <th>Priority</th>
-    <th>Description</th>
-    <th>Assignee to</th>
-    <th>Reporter to</th>
-    <th>Status</th>
-    <th>Created at</th>
-    <th></th>
-  </tr>
-</thead>
-<tbody>
-     {% for task in tasks %}
-        <tr>
-          <td>{{ task.priority.name}}</td>
-          <td>{{ task.description}}</td>
-          <td>{{ task.assignee.name}}</td>
-          <td>{{ task.reporter.name}}</td>
-          <td>{{ task.status.name}}</td>
-          <td>{{ task.createdAt|date('Y-m-d H:i:s') }}</td>
-          <td><a href="{{ path('_task_edit',{'id': task.id})}}">Edit</a> <a data-toggle="modal" href="#myModal" class="btn btn-link">Launch demo modal</a> <a data-toggle="modal" href="http://www.elmundo.es" data-target="#modal">click me</a></td>
-        </tr>
-    {% endfor %}
 
-</tbody>
+
+<table class="table table-bordered table-grid " id="table-task">
+    {% include 'TodoBundle::table_task.html.twig' %}         
 </table>
-
-<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">Modal header</h3>
-  </div>
-  <div class="modal-body">
-    <p>One fine body…</p>
-  </div>
-  <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    <button class="btn btn-primary">Save changes</button>
-  </div>
-</div>
-
 {%endblock%}
+
+{% block modal_done %}
+<div id="modal-from-done" class="modal hide fade">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3>Set Done Task</h3>
+    </div>
+    <div class="modal-body">
+      <p>You are about to set "Done" one task</p>
+      <p>Do you want to proceed?</p>
+    </div>
+    <div class="modal-footer">
+      <a href="javascript:$('#modal-from-done').modal('hide')" class="btn secondary">No</a>  
+      <button id="done-confirm" class=" accept-confirm-done btn btn-primary" data-id="" data-refresh-url="{{ path('_welcome',{'ajax_update':'ajax_update'})}}">Yes</button>      
+    </div>
+</div>
+{% endblock %}
+
+
+{% block modal_success %}
+<div id="modal-from-success" class="modal hide fade">
+    <div class="modal-header" >
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3></h3>
+    </div>
+    <div class="modal-body">
+      <p></p>
+    </div>
+    <div class="modal-footer">
+      <a href="javascript:$('#modal-from-success').modal('hide')" class="btn primary">Close</a>  
+    </div>
+</div>
+{% endblock %}
 

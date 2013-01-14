@@ -4,8 +4,8 @@ todo:
 
 
 _welcome:
-    pattern:   /
-    defaults:  { _controller: TodoBundle:Default:index }
+    pattern:   /{ajax_update}
+    defaults:  { _controller: TodoBundle:Default:index, ajax_update: NULL }
 
 _task_new:
     pattern:   /tasks/new
@@ -14,6 +14,10 @@ _task_new:
 _task_edit:
     pattern:   /tasks/edit/{id}
     defaults:  { _controller: TodoBundle:Default:editTask }        
+
+_task_done:
+    pattern:   /tasks/done/{id}
+    defaults:  { _controller: TodoBundle:Default:doneTask } 
 
     
 _user_list:

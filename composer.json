@@ -26,6 +26,7 @@
         "craue/formflow-bundle": "dev-master",
         "mopa/remote-update-bundle": "dev-master",
         "propel/propel-bundle": "1.1.*"
+        
     },
     "scripts": {
         "post-install-cmd": [
