@@ -3,17 +3,12 @@
 {% block title %}Tasks{%endblock%}
 
 {% block content %}
-<a href="{{ path('_task_new')}}" class="btn btn-small"><i class="icon-plus"></i> New</a>
 
-<!--
-<ul class="nav nav-pills">
-  <li class="active">
-    <a href="#">Home</a>
-  </li>
-  <li><a href="#">...</a></li>
-  <li><a href="#">...</a></li>
-</ul>
--->
+<div class="btn-group">
+  <button class="btn btn-small"><a href="{{ path('_task_new')}}" ><i class="icon-plus"></i> New</a></button>
+  <button class="btn btn-small"><a href="#" ><i class=" icon-remove"></i> Delete</a></button>
+  
+</div>
 
 
 <table class="table table-bordered table-grid " id="table-task">
